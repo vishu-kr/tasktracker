@@ -1,0 +1,30 @@
+.model{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerModel{
+    background: #fff;
+    padding: 0 10px 10px 10px;
+    border-radius: 4px;
+    width: 350px;
+    height: 400px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+p{
+    text-align: right;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+p:hover{
+    color: rgb(3, 148, 252);
+}

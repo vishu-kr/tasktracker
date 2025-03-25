@@ -1,8 +1,4 @@
-import { useState } from "react"
-import Model from "./PopupModel/Model"
-
-const Button = ({ textOnButton }) => {
-    const [modelIsOpen, setModelIsOpen] = useState(false)
+const Button = ({ textOnButton, onclick }) => {
     const buttonStyle = {
         backgroundColor: 'rgb(3, 148, 252)',
         color: 'white',
@@ -10,17 +6,12 @@ const Button = ({ textOnButton }) => {
         borderRadius: '5px',
         border: 'none',
         cursor: 'pointer',
-    }
-
-    const toggleModel = () => {
-        setModelIsOpen(!modelIsOpen)
+        marginTop: '5px',
+        marginRight: '5px',
     }
 
     return <>
-        <button style={buttonStyle} onClick={toggleModel}>{textOnButton}</button>
-        {
-            modelIsOpen && <Model click={toggleModel} />
-        }
+        <button style={buttonStyle} onClick={onclick}>{textOnButton}</button>
     </>
 
 }

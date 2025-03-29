@@ -11,7 +11,7 @@ const Button = ({ textOnButton, onclick }) => {
     }
 
     return <>
-        <button style={buttonStyle} onClick={onclick}>{textOnButton}</button>
+        <button style={buttonStyle} onClick={onclick}> {textOnButton} </button>
     </>
 
 }

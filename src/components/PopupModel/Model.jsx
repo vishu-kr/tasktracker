@@ -1,5 +1,6 @@
 import Button from "../Button"
 import "./Model.css"
+import PopupForm from "./PopupForm/PopupForm"
 
 const Model = ({ click }) => {
     return <>
@@ -10,10 +11,11 @@ const Model = ({ click }) => {
                 </div>
                 <hr style={{ border: '1px solid #333', margin: '0px' }} />
                 <div className="modelBody">
+                    <PopupForm />
                 </div>
                 <hr style={{ border: '1px solid #333', margin: '0px' }} />
                 <div className="modelFooter">
-                    <Button style={{ paddingRight: '5 px', padding: '5 px' }} textOnButton="Cancel" />
+                    <Button style={{ paddingRight: '5 px', padding: '5 px' }} textOnButton="Cancel" onclick={click} />
                     <Button textOnButton="Save" />
                 </div>
             </div>

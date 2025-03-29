@@ -33,6 +33,7 @@ p:hover{
 
 .modelBody {
     height: 310px;
+    overflow-y: auto;
 }
 
 .modelFooter{

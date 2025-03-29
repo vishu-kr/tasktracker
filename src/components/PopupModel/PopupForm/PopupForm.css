@@ -1,0 +1,38 @@
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+  
+label {
+    font-weight: bold;
+    color: #333;
+}
+  
+input, textarea, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+}
+  
+input:focus,textarea:focus, select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+textarea{
+    resize: none
+}

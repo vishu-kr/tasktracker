@@ -2,7 +2,6 @@
 .form-container {
     background-color: #fff;
     padding: 20px;
-    border-radius: 12px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -24,8 +23,7 @@ input, textarea, select {
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 14px;
-    outline: none;
-    transition: border 0.3s ease-in-out;
+    transition: border 3s ease-in-out;
 }
   
 input:focus,textarea:focus, select:focus {

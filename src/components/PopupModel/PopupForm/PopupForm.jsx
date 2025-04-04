@@ -1,18 +1,36 @@
+import { useForm } from 'react-hook-form'
 import "./PopupForm.css";
-const PopupForm = () => {
+import { useContext, useEffect } from 'react';
+import { FormContext, useFormContext } from '../../../context/FormContext';
+
+const PopupForm = ({ onClose }) => {
+    const form = useForm()
+    const { register, handleSubmit } = form;
+    const submitFormRef = useFormContext();
+    useEffect(() => {
+        if (submitFormRef) {
+            submitFormRef.current = handleSubmit(onSubmit)
+        }
+    }, [handleSubmit, submitFormRef]);
+
+    const onSubmit = (data) => {
+        alert("Form Submitted")
+        onClose()
+    }
+
     return <>
-        <form className="form-container">
+        <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label htmlFor="summary">Summary</label>
-                <input type="text" name="summary" id="summary" />
+                <input type="text" id="summary" {...register("summary")} />
             </div>
             <div className="form-group">
                 <label htmlFor="tasktype">Task Type</label>
-                <input type="text" name="tasktype" id="tasktype" />
+                <input type="text" id="tasktype" {...register("tasktype")} />
             </div>
             <div className="form-group">
                 <label htmlFor="priority">Priority</label>
-                <select name="priority" id="priority">
+                <select id="priority" {...register("priority")}>
                     <option value="">Select One</option>
                     <option value="Low">Low</option>
                     <option value="medium">Medium</option>
@@ -21,7 +39,7 @@ const PopupForm = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="status">Status</label>
-                <select name="status" id="status">
+                <select id="status" {...register("status")}>
                     <option value="">Select One</option>
                     <option value="open">Open</option>
                     <option value="inprogress">Inprogress</option>
@@ -30,19 +48,19 @@ const PopupForm = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="startdt">Start Date</label>
-                <input type="date" name="startdt" id="startdt" />
+                <input type="date" id="startdt" {...register("startdt")} />
             </div>
             <div className="form-group">
                 <label htmlFor="enddt">End Date</label>
-                <input type="date" name="enddt" id="enddt" />
+                <input type="date" id="enddt" {...register("enddt")} />
             </div>
             <div className="form-group">
                 <label htmlFor="desc">Description</label>
-                <textarea id="desc" name="desc" rows="4"></textarea>
+                <textarea id="desc" rows="4" {...register("desc")}></textarea>
             </div>
             <div className="form-group">
                 <label htmlFor="est">Estimate</label>
-                <input type="number" name="est" id="est" />
+                <input type="number" id="est" {...register("est")} />
             </div>
         </form>
     </>

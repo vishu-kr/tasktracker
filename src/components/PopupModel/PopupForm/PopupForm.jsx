@@ -1,18 +1,44 @@
+import { useForm } from 'react-hook-form'
 import "./PopupForm.css";
-const PopupForm = () => {
+import { useContext, useEffect } from 'react';
+import { FormContext, useFormContext } from '../../../context/FormContext';
+
+const PopupForm = ({ onClose }) => {
+    const form = useForm()
+    const { register, handleSubmit } = form;
+    const submitFormRef = useFormContext();
+    useEffect(() => {
+        if (submitFormRef) {
+            submitFormRef.current = handleSubmit(onSubmit)
+        }
+    }, [handleSubmit, submitFormRef]);
+
+    const onSubmit = (data) => {
+        fetch('https://task-tracker-backend-yv45.onrender.com/tasks/add_task', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(() => {
+            alert('Task submitted successfully')
+            onClose()
+        })
+    }
+
     return <>
-        <form className="form-container">
+        <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label htmlFor="summary">Summary</label>
-                <input type="text" name="summary" id="summary" />
+                <input type="text" id="summary" {...register("summary")} />
             </div>
             <div className="form-group">
                 <label htmlFor="tasktype">Task Type</label>
-                <input type="text" name="tasktype" id="tasktype" />
+                <input type="text" id="tasktype" {...register("tasktype")} />
             </div>
             <div className="form-group">
                 <label htmlFor="priority">Priority</label>
-                <select name="priority" id="priority">
+                <select id="priority" {...register("priority")}>
                     <option value="">Select One</option>
                     <option value="Low">Low</option>
                     <option value="medium">Medium</option>
@@ -21,7 +47,7 @@ const PopupForm = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="status">Status</label>
-                <select name="status" id="status">
+                <select id="status" {...register("status")}>
                     <option value="">Select One</option>
                     <option value="open">Open</option>
                     <option value="inprogress">Inprogress</option>
@@ -29,20 +55,20 @@ const PopupForm = () => {
                 </select>
             </div>
             <div className="form-group">
-                <label htmlFor="startdt">Start Date</label>
-                <input type="date" name="startdt" id="startdt" />
+                <label htmlFor="start_dt">Start Date</label>
+                <input type="date" id="start_dt" {...register("start_dt")} />
             </div>
             <div className="form-group">
-                <label htmlFor="enddt">End Date</label>
-                <input type="date" name="enddt" id="enddt" />
+                <label htmlFor="due_date">End Date</label>
+                <input type="date" id="due_date" {...register("due_date")} />
             </div>
             <div className="form-group">
-                <label htmlFor="desc">Description</label>
-                <textarea id="desc" name="desc" rows="4"></textarea>
+                <label htmlFor="description">Description</label>
+                <textarea id="description" rows="4" {...register("description")}></textarea>
             </div>
             <div className="form-group">
-                <label htmlFor="est">Estimate</label>
-                <input type="number" name="est" id="est" />
+                <label htmlFor="estimate">Estimate</label>
+                <input type="number" id="estimate" {...register("estimate")} />
             </div>
         </form>
     </>

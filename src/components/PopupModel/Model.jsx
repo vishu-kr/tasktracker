@@ -1,11 +1,10 @@
-import { useContext } from "react"
 import Button from "../Button"
 import "./Model.css"
 import PopupForm from "./PopupForm/PopupForm"
 import { useFormContext } from "../../context/FormContext"
 
 const Model = ({ click }) => {
-    const submitFormRef = useFormContext()
+    const { submitFormRef, isPending } = useFormContext()
     const handleSave = () => {
         if (submitFormRef.current) {
             submitFormRef.current();
@@ -24,7 +23,8 @@ const Model = ({ click }) => {
                 <hr style={{ border: '1px solid #333', margin: '0px' }} />
                 <div className="modelFooter">
                     <Button style={{ paddingRight: '5 px', padding: '5 px' }} textOnButton="Cancel" onclick={click} />
-                    <Button textOnButton="Save" onclick={handleSave} />
+                    {!isPending && <Button textOnButton="Save" onclick={handleSave} />}
+                    {isPending && <Button textOnButton="Adding Task.." />}
                 </div>
             </div>
         </div>

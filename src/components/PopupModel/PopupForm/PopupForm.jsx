@@ -1,12 +1,13 @@
 import { useForm } from 'react-hook-form'
 import "./PopupForm.css";
-import { useContext, useEffect } from 'react';
-import { FormContext, useFormContext } from '../../../context/FormContext';
+import { useEffect } from 'react';
+import { useFormContext } from '../../../context/FormContext';
 
 const PopupForm = ({ onClose }) => {
     const form = useForm()
     const { register, handleSubmit } = form;
-    const submitFormRef = useFormContext();
+    const { submitFormRef } = useFormContext();
+    const { toggleSaveButton } = useFormContext();
     useEffect(() => {
         if (submitFormRef) {
             submitFormRef.current = handleSubmit(onSubmit)
@@ -14,6 +15,7 @@ const PopupForm = ({ onClose }) => {
     }, [handleSubmit, submitFormRef]);
 
     const onSubmit = (data) => {
+        toggleSaveButton()
         fetch('https://task-tracker-backend-yv45.onrender.com/tasks/add_task', {
             method: 'POST',
             headers: {
@@ -22,6 +24,7 @@ const PopupForm = ({ onClose }) => {
             body: JSON.stringify(data),
         }).then(() => {
             alert('Task submitted successfully')
+            toggleSaveButton()
             onClose()
         })
     }
